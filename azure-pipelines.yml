@@ -81,21 +81,6 @@ steps:
     buildProperties: 'VERSION=$(build.buildNumber)'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 
-- task: GitHubRelease@1
-  inputs:
-    gitHubConnection: 'azure-github-sqs'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
-    target: '$(build.buildNumber)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(build.buildNumber)'
-    title: 'v$(build.buildNumber)'
-    releaseNotesFilePath: 'Changelog.md'
-    assets: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    addChangeLog: false
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-  continueOnError: true
-
 - task: NuGetCommand@2
   displayName: 'NuGet push'
   inputs:
