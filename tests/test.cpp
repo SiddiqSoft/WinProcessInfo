@@ -76,3 +76,22 @@ TEST(examples, Example2)
 		EXPECT_TRUE(false) << e.what(); // if we throw then the test fails.
 	}
 }
+
+TEST(examples, Example3)
+{
+	try
+	{
+		siddiqsoft::WinProcessInfo procInfo;
+
+		// We must perform the snapshot to obtain memory and thread usage
+		procInfo.snapshot();
+
+		std::cerr << nlohmann::json(procInfo).dump(4) << std::endl;
+		EXPECT_EQ(GetCurrentProcessId(), nlohmann::json(procInfo).value("processId", 0));
+		std::cerr << std::format("{} - Contents:{}\n", __func__, procInfo);
+	}
+	catch (std::exception& e)
+	{
+		EXPECT_TRUE(false) << e.what(); // if we throw then the test fails.
+	}
+}
