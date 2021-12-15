@@ -37,15 +37,6 @@ steps:
     Action: '##vso[build.updatebuildnumber]'
     BuildVersion: $(GitVersion.NugetVersionV2)
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
-    vstsFeed: 'ec2759e0-0587-4306-8a8d-8695f15e2336'
-  continueOnError: true
-
 - task: VSBuild@1
   displayName: 'Build solution WinProcessInfo.sln RELEASE'
   inputs:
