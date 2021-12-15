@@ -173,7 +173,7 @@ namespace siddiqsoft
 	/// @brief Serializer for nlohmann::json library
 	/// @param dest The destination target
 	/// @param wpi Our source object
-	void to_json(nlohmann::json& dest, const WinProcessInfo& wpi)
+	static void to_json(nlohmann::json& dest, const WinProcessInfo& wpi)
 	{
 		dest = nlohmann::json
 		{
